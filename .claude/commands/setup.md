@@ -77,11 +77,12 @@ Wait for confirmation.
 ### Step 4 — Write Files
 
 Once confirmed:
-1. Update `profile/01-candidate.md` with all professional details
-2. Update `profile/02-behavioural.md` with STAR examples (leave guidance text for any unfilled slots)
-3. Update `profile/03-writing-style.md` with tone and language preferences
-4. Update `profile/04-interview-prep.md` with any interview prep notes
-5. Update `config.yaml` with confirmed `candidate_name`, `target_roles`, `locations`, `salary_min_aud`, `salary_max_aud`, and `work_types`
+1. If `config.yaml` doesn't exist yet, copy `config.example.yaml` to `config.yaml` first. The personal `config.yaml` is gitignored so it never gets committed.
+2. Update `profile/01-candidate.md` with all professional details
+3. Update `profile/02-behavioural.md` with STAR examples (leave guidance text for any unfilled slots)
+4. Update `profile/03-writing-style.md` with tone and language preferences
+5. Update `profile/04-interview-prep.md` with any interview prep notes
+6. Update `config.yaml` with confirmed `candidate_name`, `target_roles`, `locations`, `salary_min_aud`, `salary_max_aud`, and `work_types`
 
 ### Step 5 — Summary and Next Steps
 

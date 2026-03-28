@@ -106,11 +106,11 @@ pip3 install -r requirements.txt
 
 ---
 
-## Step 5: Edit config.yaml
+## Step 5: Understand config.example.yaml
 
-Open `config.yaml` in any text editor. This is the only file you need to edit before running `/setup`.
+The repo includes `config.example.yaml` as a template. You don't need to edit it — when you run `/setup` in Step 6, Claude will create your personal `config.yaml` (which is gitignored so your details stay private).
 
-Here's what each field means:
+Here's what each field means, so you know what to expect:
 
 ### `candidate_name`
 Your full name as it should appear on your CV and cover letters.

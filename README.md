@@ -88,7 +88,8 @@ The core workflow. Accepts a job URL or pasted description, then:
 
 | Path | Purpose |
 |------|---------|
-| `config.yaml` | Your search settings, API keys, and preferences |
+| `config.example.yaml` | Template config — copied to `config.yaml` by `/setup` |
+| `config.yaml` | Your personal config (gitignored, created by `/setup`) |
 | `profile/01-candidate.md` | Professional profile — experience, skills, education |
 | `profile/02-behavioural.md` | STAR-format examples for interviews and cover letters |
 | `profile/03-writing-style.md` | Tone, structure, and language preferences |

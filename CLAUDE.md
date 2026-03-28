@@ -7,7 +7,7 @@ This repository is an AI-powered job search framework for the Australian market.
 ## Behaviour Rules
 
 ### Before every task
-1. **Read `config.yaml`** to understand the candidate's target roles, locations, salary range, and preferences.
+1. **Read `config.yaml`** to understand the candidate's target roles, locations, salary range, and preferences. If `config.yaml` doesn't exist yet, tell the user to run `/setup` first (it creates `config.yaml` from `config.example.yaml`).
 2. **Read the relevant `profile/` files** before drafting any document. Never generate content without first loading the candidate's actual experience and writing style.
 
 ### When drafting CVs and cover letters
@@ -43,7 +43,8 @@ The core workflow. Accepts a job URL or pasted description, evaluates fit, draft
 ## File Structure
 
 ```
-config.yaml                          # User configuration
+config.example.yaml                  # Template config (tracked in git)
+config.yaml                          # Personal config (gitignored, created by /setup)
 profile/
   01-candidate.md                    # Professional profile
   02-behavioural.md                  # STAR-format examples
