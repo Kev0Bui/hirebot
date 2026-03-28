@@ -1,11 +1,11 @@
 # /apply — Generate Tailored Application Documents
 
-You are running the core application workflow for Hirebot AU. This is a multi-step drafter-reviewer pipeline that produces a tailored CV and cover letter for a specific job.
+You are running the core application workflow for Hirebot. This is a multi-step drafter-reviewer pipeline that produces a tailored CV and cover letter for a specific job.
 
 ## Input
 
 Accept ONE of the following:
-- A job listing URL (from Adzuna, Seek, LinkedIn, or any job board)
+- A job listing URL (from any job board — Seek, LinkedIn, Indeed, Glassdoor, or any other)
 - A pasted job description
 
 If the user provides a URL, fetch the page content. If fetching fails, ask the user to paste the job description instead.
@@ -18,7 +18,7 @@ Extract these details from the job posting:
 - **Key responsibilities** (bullet points)
 - **Required skills and qualifications**
 - **Nice-to-have skills**
-- **Location** (city, state, remote/hybrid/office)
+- **Location** (city, state/country, remote/hybrid/office)
 - **Work type** (full-time, contract, part-time)
 - **Salary** (if listed)
 - **Application deadline** (if listed)
@@ -69,12 +69,12 @@ Apply the scoring rubric from SKILL.md and present the evaluation:
 Read these files before drafting:
 - `profile/01-candidate.md` — for experience and skills
 - `profile/02-behavioural.md` — for relevant examples to weave in
-- `profile/03-writing-style.md` — for tone, structure, and language rules
-- `config.yaml` — for output format and template style
+- `profile/03-writing-style.md` — for tone, structure, language rules, and spelling convention
+- `config.yaml` — for template style
 
 ### CV
 
-Generate a tailored CV as both `.docx` (for editing) and `.pdf` (for submission) using `python-docx` and `fpdf2`:
+Generate a tailored CV as `.docx` using `python-docx`:
 - **Emphasise** skills and experience most relevant to THIS specific role
 - **Reorder** sections to put the most relevant experience first
 - **Never add** skills, qualifications, or experience the candidate doesn't have
@@ -93,24 +93,24 @@ The CV should include:
 
 ### Cover Letter
 
-Generate a tailored cover letter as both `.docx` and `.pdf`:
+Generate a tailored cover letter as `.docx`:
 - **Follow the structure** defined in `profile/03-writing-style.md`
 - **Opening:** Specific to this company and role — never generic
 - **Body:** Forward-looking framing — what the candidate WILL bring, not just what they've done. Connect specific experience to specific requirements in the job posting.
 - **Closing:** Confident, specific call to action
 - **Length:** 3–4 paragraphs, fitting on one page
-- **Australian English throughout** — organisation, colour, analyse, programme, labour
+- **Use the spelling and language conventions** captured in `profile/03-writing-style.md`, or inferred from the user's location and target market (e.g. Australian English for Australian roles, American English for US roles)
 - **Respect all "never do" rules** from the writing style guide
 
 ### Save Files
 
-Save all documents to the outputs directory:
-- CV: `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.docx` and `.pdf`
-- Cover letter: `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.docx` and `.pdf`
+Save documents to the outputs directory:
+- CV: `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.docx`
+- Cover letter: `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.docx`
 
 Use today's date. Remove spaces and special characters from company and role names (use PascalCase).
 
-Tell the user the files have been saved. Make clear which are for editing (.docx) and which are ready to submit (.pdf).
+Tell the user the files have been saved.
 
 ## Step 4 — Review
 
@@ -131,7 +131,7 @@ Spawn a subagent (using the Agent tool) with this instruction:
 > - Weak or clichéd opening
 > - Claims not supported by the profile
 > - Tone mismatches with the candidate's writing style (profile/03-writing-style.md)
-> - Any non-Australian spelling
+> - Spelling inconsistencies (e.g. mixing American and British English)
 >
 > **Provide:**
 > - 3–5 specific, actionable improvements (not vague suggestions)
@@ -153,7 +153,7 @@ Present the reviewer's feedback to the user:
 
 Apply the reviewer's feedback to both documents:
 - Make the specific changes suggested
-- Re-save both .docx and .pdf files (overwrite the originals)
+- Re-save the .docx files (overwrite the originals)
 - Briefly note what was changed
 
 > I've applied the reviewer's feedback:
@@ -171,15 +171,13 @@ Show the user a verification checklist:
 >
 > - [ ] All CV claims verified against profile
 > - [ ] Cover letter opening is specific to [company name] and [role title]
-> - [ ] Australian spelling used throughout
+> - [ ] Spelling convention consistent throughout
 > - [ ] Output files saved to correct locations
 > - [ ] Job added to tracker
 >
 > **Files:**
-> - CV (edit): `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.docx`
-> - CV (submit): `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.pdf`
-> - Cover letter (edit): `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.docx`
-> - Cover letter (submit): `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.pdf`
+> - CV: `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.docx`
+> - Cover letter: `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.docx`
 
 Update `job_tracker.csv` — add the job (if not already tracked) or update its status to "Applied".
 
@@ -191,6 +189,6 @@ Then ask:
 
 - **Never fabricate skills or experience.** If the job requires something the candidate doesn't have, note the gap honestly in the cover letter or omit it — never invent it.
 - **Always read the profile files** before drafting. Do not rely on memory from previous sessions.
-- **Use Australian English** throughout: organisation, colour, analyse, programme, behaviour, labour, favour, centre, defence.
-- **Test that python-docx and fpdf2 are available** before generating files. If not installed, run `pip3 install python-docx fpdf2` first.
+- **Use the spelling convention from `profile/03-writing-style.md`**, or infer from the user's location and the job's target market.
+- **Test that python-docx is available** before generating files. If not installed, run `pip3 install python-docx` first.
 - **Handle errors gracefully.** If URL fetching fails, ask for pasted content. If file writing fails, show the error and suggest a fix.

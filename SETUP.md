@@ -1,6 +1,6 @@
 # Detailed Setup Guide
 
-This guide walks you through every step of setting up Hirebot AU, including installing prerequisites. If you're comfortable with Python and the command line, the [Quick Start in the README](README.md) might be all you need.
+This guide walks you through every step of setting up Hirebot, including installing prerequisites. If you're comfortable with Python and the command line, the [Quick Start in the README](README.md) might be all you need.
 
 ---
 
@@ -66,30 +66,13 @@ You should see a version number. If not, check the [Claude Code documentation](h
 
 ---
 
-## Step 3: Get an Adzuna API Key
-
-Adzuna is a job search engine that aggregates listings from across Australia. Their API is free for personal use.
-
-1. Go to [developer.adzuna.com](https://developer.adzuna.com/)
-2. Click **"Sign Up"** in the top right
-3. Fill in your details and create an account
-4. Once logged in, you'll be taken to your dashboard
-5. You'll see two values:
-   - **Application ID** — a short string like `a1b2c3d4`
-   - **Application Key** — a longer string like `abcdef1234567890abcdef1234567890`
-6. Copy both of these — you'll need them in Step 4b
-
-The free tier gives you 250 API calls per day, which is plenty for job searching.
-
----
-
-## Step 4: Clone the Repository
+## Step 3: Clone the Repository
 
 Open your terminal and run:
 
 ```bash
-git clone https://github.com/Kev0Bui/hirebot-au.git
-cd hirebot-au
+git clone https://github.com/Kev0Bui/hirebot.git
+cd hirebot
 ```
 
 Then install the Python dependencies:
@@ -106,21 +89,23 @@ pip3 install -r requirements.txt
 
 ---
 
-## Step 5: Understand config.example.yaml
+## Step 4: Understand config.example.yaml
 
-The repo includes `config.example.yaml` as a template. You don't need to edit it — when you run `/setup` in Step 6, Claude will create your personal `config.yaml` (which is gitignored so your details stay private).
+The repo includes `config.example.yaml` as a template. You don't need to edit it — when you run `/setup` in Step 5, Claude will create your personal `config.yaml` (which is gitignored so your details stay private).
 
 Here's what each field means, so you know what to expect:
 
-### `candidate_name`
+### Core config
+
+#### `candidate_name`
 Your full name as it should appear on your CV and cover letters.
 
 ```yaml
 candidate_name: "Jane Smith"
 ```
 
-### `target_roles`
-The job titles you're looking for. Be specific — these are used to search job boards.
+#### `target_roles`
+The job titles you're looking for. Be specific — these are used to score job postings.
 
 ```yaml
 target_roles:
@@ -129,34 +114,7 @@ target_roles:
   - "Business Analyst"
 ```
 
-### `locations`
-Australian cities or regions you'd work in. Use "Remote" for fully remote roles.
-
-```yaml
-locations:
-  - "Brisbane"
-  - "Sydney"
-  - "Remote"
-```
-
-### `salary_min_aud` and `salary_max_aud`
-Your salary range in AUD (annual, before tax). This filters Adzuna results. Set to `0` to disable.
-
-```yaml
-salary_min_aud: 80000
-salary_max_aud: 140000
-```
-
-### `work_types`
-Types of employment you're open to. Options: `full_time`, `contract`, `part_time`.
-
-```yaml
-work_types:
-  - "full_time"
-  - "contract"
-```
-
-### `keywords_include`
+#### `keywords_include`
 Terms that should appear in relevant job listings. Jobs with more of these keywords get higher fit scores.
 
 ```yaml
@@ -166,7 +124,7 @@ keywords_include:
   - "agile"
 ```
 
-### `keywords_exclude`
+#### `keywords_exclude`
 Terms that signal irrelevant roles. Jobs matching these are filtered out entirely.
 
 ```yaml
@@ -176,25 +134,16 @@ keywords_exclude:
   - "internship"
 ```
 
-### Adzuna API credentials
-
-Your Adzuna credentials go in a `.env` file (not `config.yaml`) so they don't get committed to git. Create a file called `.env` in the repo root:
-
-```
-ADZUNA_APP_ID=a1b2c3d4
-ADZUNA_APP_KEY=abcdef1234567890abcdef1234567890
-```
-
-Replace the values with your actual credentials from Step 3.
-
-### `output_format`
-Currently only `docx` is supported. Leave this as-is.
+#### `work_types`
+Types of employment you're open to. Options: `full_time`, `contract`, `part_time`.
 
 ```yaml
-output_format: "docx"
+work_types:
+  - "full_time"
+  - "contract"
 ```
 
-### `cv_template_style`
+#### `cv_template_style`
 Controls the visual layout of generated CVs. Options:
 
 - `professional` — Clean and conservative. Good for government, enterprise, and traditional industries.
@@ -205,9 +154,46 @@ Controls the visual layout of generated CVs. Options:
 cv_template_style: "professional"
 ```
 
+### Australian job search config (optional)
+
+These fields are only used by the `/scrape` command, which searches Australian job boards via the Adzuna API. If you're not in Australia, you can ignore this section entirely.
+
+#### `locations`
+Australian cities or regions you'd work in. Use "Remote" for fully remote roles.
+
+```yaml
+locations:
+  - "Brisbane"
+  - "Sydney"
+  - "Remote"
+```
+
+#### `salary_min_aud` and `salary_max_aud`
+Your salary range in AUD (annual, before tax). This filters Adzuna results. Set to `0` to disable.
+
+```yaml
+salary_min_aud: 80000
+salary_max_aud: 140000
+```
+
+#### Adzuna API credentials
+
+To use `/scrape`, you need free Adzuna API credentials. Your credentials go in a `.env` file (not `config.yaml`) so they don't get committed to git:
+
+1. Sign up at [developer.adzuna.com](https://developer.adzuna.com/) (free)
+2. Copy your Application ID and Application Key from the dashboard
+3. Create a `.env` file in the repo root:
+
+```
+ADZUNA_APP_ID=a1b2c3d4
+ADZUNA_APP_KEY=abcdef1234567890abcdef1234567890
+```
+
+Replace the values with your actual credentials. The free tier gives you 250 API calls per day, which is plenty for job searching.
+
 ---
 
-## Step 6: Run /setup
+## Step 5: Run /setup
 
 Start a Claude Code session:
 
@@ -225,16 +211,19 @@ Claude will conduct a conversational interview to build your professional profil
 
 ---
 
-## Step 7: Start Searching
+## Step 6: Start Applying
 
-After setup is complete, you have two main commands:
+After setup is complete, you're ready to go:
 
 ```
-/scrape     # Search for jobs matching your profile
-/apply      # Generate a tailored CV and cover letter for a specific job
+/apply      # Paste a job URL or description to generate a tailored CV and cover letter
 ```
 
-Run `/scrape` to see what's available, pick a job, and `/apply` handles the rest.
+If you're in Australia and have Adzuna credentials set up:
+
+```
+/scrape     # Search Australian job boards for matching roles
+```
 
 ---
 
@@ -247,7 +236,7 @@ pip install -r requirements.txt
 ```
 
 ### "Error: 'adzuna_app_id' is not set"
-Create a `.env` file in the repo root with your Adzuna credentials. See Step 3 and the `adzuna_app_id` section under Step 5.
+Create a `.env` file in the repo root with your Adzuna credentials. See the Adzuna API credentials section under Step 4.
 
 ### "Error: Adzuna API returned 401 Unauthorised"
 Your API credentials are incorrect. Double-check them at [developer.adzuna.com](https://developer.adzuna.com/) — make sure you're using the Application ID and Application Key (not your login password).

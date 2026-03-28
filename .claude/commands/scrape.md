@@ -1,6 +1,32 @@
-# /scrape — Search for Jobs
+# /scrape — Search for Jobs (Australia only)
 
-You are running the Adzuna job search for Hirebot AU.
+> **This command searches the Adzuna AU API for Australian job listings.** It requires free Adzuna API credentials. If you're not in Australia, use `/apply` directly with a job URL or pasted description from any job board.
+
+You are running the Adzuna job search for Hirebot.
+
+## Prerequisites
+
+Before running the search, check that Adzuna API credentials are configured:
+
+1. Read the `.env` file (or check environment variables) for `ADZUNA_APP_ID` and `ADZUNA_APP_KEY`.
+2. If either is missing or empty, stop and tell the user:
+
+> The `/scrape` command requires Adzuna API credentials, which aren't set up yet.
+>
+> Adzuna is a job search engine that aggregates Australian job listings. Their API is free for personal use.
+>
+> **To set up:**
+> 1. Sign up at [developer.adzuna.com](https://developer.adzuna.com/) (free)
+> 2. Copy your Application ID and Application Key from the dashboard
+> 3. Create a `.env` file in the repo root with:
+>    ```
+>    ADZUNA_APP_ID=your-app-id
+>    ADZUNA_APP_KEY=your-app-key
+>    ```
+>
+> Once that's done, run `/scrape` again.
+
+If credentials are present, proceed to Step 1.
 
 ## Process
 
@@ -55,7 +81,6 @@ Parse the output and present it as a clean numbered list:
 
 ## Rules
 
-- Always read `config.yaml` before running the search to confirm credentials are set.
+- Always read `config.yaml` before running the search to confirm the AU search fields are present.
 - Display results clearly — don't dump raw script output at the user.
 - If there are no results at all, be helpful: suggest adjusting target roles, expanding locations, or lowering salary_min_aud.
-- Use Australian English throughout.
