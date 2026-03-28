@@ -60,8 +60,11 @@ keywords_exclude:
 # Sign up free at https://developer.adzuna.com to get your credentials.
 # The .env file is gitignored, so your keys stay private.
 
-# Output format for CVs and cover letters. Currently only "docx" is supported.
-output_format: "docx"
+# Output formats for CVs and cover letters.
+# Both .docx and .pdf are always generated:
+#   - .docx for editing before submission
+#   - .pdf for submitting directly
+output_format: "both"
 
 # CV template style. Controls the visual layout of generated .docx CVs.
 # Options: professional, creative, minimal

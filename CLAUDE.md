@@ -13,8 +13,8 @@ This repository is an AI-powered job search framework for the Australian market.
 ### When drafting CVs and cover letters
 - **Never fabricate skills, experience, or qualifications.** Every claim in a CV or cover letter must be verifiable against the profile files. If the candidate's profile doesn't mention a skill the job requires, note the gap — do not invent it.
 - **Use Australian English throughout.** Spell "organisation", "colour", "analyse", "programme" (where appropriate), "labour", "favour", etc.
-- **Save all output as `.docx`** using the `python-docx` library.
-- **CVs** go to `outputs/cv/` with the naming format: `YYYY-MM-DD_CompanyName_RoleTitle.docx`
+- **Save all output as both `.docx` and `.pdf`** using `python-docx` and `fpdf2`. The `.docx` is for the candidate to edit; the `.pdf` is for direct submission.
+- **CVs** go to `outputs/cv/` with the naming format: `YYYY-MM-DD_CompanyName_RoleTitle.docx` and `.pdf`
 - **Cover letters** go to `outputs/cover_letters/` with the same naming format.
 - **Cover letters should be forward-looking** — focus on what the candidate will bring to the role, not just what they've done.
 - **Respect the candidate's writing style** as defined in `profile/03-writing-style.md`. Match their tone, structure preferences, and language choices.

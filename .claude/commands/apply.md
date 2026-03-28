@@ -74,7 +74,7 @@ Read these files before drafting:
 
 ### CV
 
-Generate a tailored CV as a .docx file using `python-docx`:
+Generate a tailored CV as both `.docx` (for editing) and `.pdf` (for submission) using `python-docx` and `fpdf2`:
 - **Emphasise** skills and experience most relevant to THIS specific role
 - **Reorder** sections to put the most relevant experience first
 - **Never add** skills, qualifications, or experience the candidate doesn't have
@@ -93,7 +93,7 @@ The CV should include:
 
 ### Cover Letter
 
-Generate a tailored cover letter as a .docx file using `python-docx`:
+Generate a tailored cover letter as both `.docx` and `.pdf`:
 - **Follow the structure** defined in `profile/03-writing-style.md`
 - **Opening:** Specific to this company and role — never generic
 - **Body:** Forward-looking framing — what the candidate WILL bring, not just what they've done. Connect specific experience to specific requirements in the job posting.
@@ -104,13 +104,13 @@ Generate a tailored cover letter as a .docx file using `python-docx`:
 
 ### Save Files
 
-Save both documents to the outputs directory:
-- CV: `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.docx`
-- Cover letter: `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.docx`
+Save all documents to the outputs directory:
+- CV: `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.docx` and `.pdf`
+- Cover letter: `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.docx` and `.pdf`
 
 Use today's date. Remove spaces and special characters from company and role names (use PascalCase).
 
-Tell the user the files have been saved and where to find them.
+Tell the user the files have been saved. Make clear which are for editing (.docx) and which are ready to submit (.pdf).
 
 ## Step 4 — Review
 
@@ -153,7 +153,7 @@ Present the reviewer's feedback to the user:
 
 Apply the reviewer's feedback to both documents:
 - Make the specific changes suggested
-- Re-save the .docx files (overwrite the originals)
+- Re-save both .docx and .pdf files (overwrite the originals)
 - Briefly note what was changed
 
 > I've applied the reviewer's feedback:
@@ -176,8 +176,10 @@ Show the user a verification checklist:
 > - [ ] Job added to tracker
 >
 > **Files:**
-> - CV: `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.docx`
-> - Cover letter: `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.docx`
+> - CV (edit): `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.docx`
+> - CV (submit): `outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.pdf`
+> - Cover letter (edit): `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.docx`
+> - Cover letter (submit): `outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.pdf`
 
 Update `job_tracker.csv` — add the job (if not already tracked) or update its status to "Applied".
 
@@ -190,5 +192,5 @@ Then ask:
 - **Never fabricate skills or experience.** If the job requires something the candidate doesn't have, note the gap honestly in the cover letter or omit it — never invent it.
 - **Always read the profile files** before drafting. Do not rely on memory from previous sessions.
 - **Use Australian English** throughout: organisation, colour, analyse, programme, behaviour, labour, favour, centre, defence.
-- **Test that python-docx is available** before generating files. If not installed, run `pip install python-docx` first.
+- **Test that python-docx and fpdf2 are available** before generating files. If not installed, run `pip3 install python-docx fpdf2` first.
 - **Handle errors gracefully.** If URL fetching fails, ask for pasted content. If file writing fails, show the error and suggest a fix.

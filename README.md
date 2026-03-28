@@ -128,7 +128,6 @@ Each job board lives under `.agents/skills/` as its own directory. To add one:
 
 - [ ] **Seek scraper** — Browser-based scraping via Playwright for Seek.com.au listings
 - [ ] **LinkedIn manual paste helper** — Structured workflow for jobs found on LinkedIn
-- [ ] **Cover letter PDF export** — Optional PDF output alongside .docx
 - [ ] **Interview scheduler** — Track interview dates and prep in the tracker
 - [ ] **Multiple candidate profiles** — Support switching between profiles for different role types
 - [ ] **Application analytics** — Track response rates, time-to-response, and fit score accuracy

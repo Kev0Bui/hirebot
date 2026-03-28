@@ -10,7 +10,9 @@ venv/
 
 # Outputs (generated CVs and cover letters)
 outputs/cv/*.docx
+outputs/cv/*.pdf
 outputs/cover_letters/*.docx
+outputs/cover_letters/*.pdf
 
 # Local config overrides (credentials, personal settings)
 config.local.yaml
