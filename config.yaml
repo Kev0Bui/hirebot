@@ -1,0 +1,64 @@
+# =============================================================================
+# AI Job Search AU — Configuration
+# =============================================================================
+# Edit this file before running /setup. Every field has a sensible default,
+# but you should personalise it to your situation.
+# =============================================================================
+
+# Your full name as it appears on your CV and cover letters.
+candidate_name: "Your Name"
+
+# Target role titles you're looking for. Be specific — these are used to
+# query job boards and to score results against your profile.
+target_roles:
+  - "Content Designer"
+  - "UX Writer"
+  - "Business Analyst"
+
+# Australian cities or regions you'd consider working in.
+# Use "Remote" for fully remote roles.
+locations:
+  - "Brisbane"
+  - "Sydney"
+  - "Remote"
+
+# Salary expectations in AUD (annual, before tax).
+# Used to filter Adzuna results. Set to 0 to disable filtering.
+salary_min_aud: 80000
+salary_max_aud: 140000
+
+# Types of employment you're open to.
+work_types:
+  - "full_time"
+  - "contract"
+  # - "part_time"
+
+# Keywords that MUST appear in relevant job listings.
+# These boost a job's fit score when found in the title or description.
+keywords_include:
+  - "content design"
+  - "UX writing"
+  - "design systems"
+  - "user experience"
+  - "agile"
+
+# Keywords that signal irrelevant roles. Jobs matching these are filtered out.
+keywords_exclude:
+  - "senior manager"
+  - "director"
+  - "unpaid"
+  - "internship"
+  - "visa sponsorship required"
+
+# Adzuna API credentials.
+# Sign up free at https://developer.adzuna.com to get your app_id and app_key.
+# These are required for the /scrape command.
+adzuna_app_id: "YOUR_ADZUNA_APP_ID"
+adzuna_app_key: "YOUR_ADZUNA_APP_KEY"
+
+# Output format for CVs and cover letters. Currently only "docx" is supported.
+output_format: "docx"
+
+# CV template style. Controls the visual layout of generated .docx CVs.
+# Options: professional, creative, minimal
+cv_template_style: "professional"

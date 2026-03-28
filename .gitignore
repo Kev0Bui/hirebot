@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+
+# Outputs (generated CVs and cover letters)
+outputs/cv/*.docx
+outputs/cover_letters/*.docx
+
+# Local config overrides (credentials, personal settings)
+config.local.yaml
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

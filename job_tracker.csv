@@ -1,0 +1,2 @@
+date_added,job_id,company,role_title,location,work_type,salary,fit_score,source_url,status,notes
+2026-03-28,example-001,Acme Corp,Content Designer,Brisbane,full_time,95000,4,https://www.adzuna.com.au/details/example-001,Discovered,Example row — delete this and start tracking real applications
