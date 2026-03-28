@@ -8,8 +8,8 @@ Most job search tools are either glorified spreadsheets or black-box resume buil
 
 - **Your profile is the source of truth.** Claude reads your actual experience and writing style before generating anything. It never fabricates skills or experience.
 - **Drafter-reviewer pipeline.** Every application goes through an AI review step that catches generic language, unsupported claims, and weak openings before you send anything.
-- **Works anywhere.** Paste a job URL from any board in any country — Seek, LinkedIn, Indeed, Glassdoor, or anything else. `/apply` handles the rest.
-- **Minimal setup.** Python + pip. Output is `.docx` — the format recruiters and ATS systems actually expect.
+- **Works anywhere.** Paste a job URL (or drop a PDF of the job description) from any board in any country — Seek, LinkedIn, Indeed, Glassdoor, or anything else .  `/apply` handles the rest.
+- **Minimal setup.** Python + pip. Output is `.docx` — the format recruiters and ATS systems often expect.
 - **Runs inside Claude Code.** Three slash commands handle the entire workflow. No web app, no SaaS subscription.
 
 ## Quick Start
@@ -54,6 +54,10 @@ After setup, paste any job URL into `/apply` to generate a tailored application.
 
 ## Slash Commands
 
+### `/setup` — Onboarding
+
+Runs a conversational interview to build your professional profile. Claude asks about your experience, skills, writing style, and behavioural examples, then saves everything to the `profile/` files. Run this once to get started, or again any time you want to update your profile. The more information you provide, the better.
+
 ### `/apply` — Generate Application
 
 The core workflow. Accepts a job URL or pasted description from any job board, then:
@@ -64,10 +68,6 @@ The core workflow. Accepts a job URL or pasted description from any job board, t
 4. Reviews both documents through a critical hiring manager lens
 5. Applies feedback and saves final versions
 6. Presents a verification checklist
-
-### `/setup` — Onboarding
-
-Runs a conversational interview to build your professional profile. Claude asks about your experience, skills, writing style, and behavioural examples, then saves everything to the `profile/` files. Run this once to get started, or again any time you want to update your profile.
 
 ### `/scrape` — Australian Job Search (optional)
 
