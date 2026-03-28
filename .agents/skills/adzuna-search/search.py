@@ -30,7 +30,7 @@ TRACKER_PATH = REPO_ROOT / "job_tracker.csv"
 
 
 def load_config() -> dict:
-    """Load and validate config.yaml."""
+    """Load config.yaml and override API keys from .env if present."""
     if not CONFIG_PATH.exists():
         print(f"Error: config.yaml not found at {CONFIG_PATH}", file=sys.stderr)
         print("Run /setup first or copy config.yaml to the repo root.", file=sys.stderr)
@@ -39,17 +39,36 @@ def load_config() -> dict:
     with open(CONFIG_PATH, "r") as f:
         config = yaml.safe_load(f)
 
+    # Load .env file if it exists (simple key=value parsing, no extra dependency)
+    env_path = REPO_ROOT / ".env"
+    if env_path.exists():
+        with open(env_path, "r") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                if "=" in line:
+                    key, value = line.split("=", 1)
+                    os.environ[key.strip()] = value.strip().strip("\"'")
+
+    # Environment variables override config.yaml for sensitive fields
+    config["adzuna_app_id"] = os.environ.get("ADZUNA_APP_ID", config.get("adzuna_app_id", ""))
+    config["adzuna_app_key"] = os.environ.get("ADZUNA_APP_KEY", config.get("adzuna_app_key", ""))
+
     # Validate required fields
-    required = ["adzuna_app_id", "adzuna_app_key"]
-    for field in required:
+    for field in ["adzuna_app_id", "adzuna_app_key"]:
         value = config.get(field, "")
         if not value or value.startswith("YOUR_"):
             print(
-                f"Error: '{field}' in config.yaml is not set.",
+                f"Error: '{field}' is not set.",
                 file=sys.stderr,
             )
             print(
-                "Sign up at https://developer.adzuna.com and add your credentials.",
+                "Add ADZUNA_APP_ID and ADZUNA_APP_KEY to .env, or set them in config.yaml.",
+                file=sys.stderr,
+            )
+            print(
+                "Sign up at https://developer.adzuna.com to get your credentials.",
                 file=sys.stderr,
             )
             sys.exit(1)
