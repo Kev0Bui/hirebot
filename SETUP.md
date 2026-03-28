@@ -88,7 +88,7 @@ The free tier gives you 250 API calls per day, which is plenty for job searching
 Open your terminal and run:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/hirebot-au.git
+git clone https://github.com/Kev0Bui/hirebot-au.git
 cd hirebot-au
 ```
 

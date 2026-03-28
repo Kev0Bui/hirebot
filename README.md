@@ -44,11 +44,11 @@ Most job search tools are either glorified spreadsheets or black-box resume buil
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/YOUR_USERNAME/hirebot-au.git
+git clone https://github.com/Kev0Bui/hirebot-au.git
 cd hirebot-au
 
 # 2. Install dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 # 3. Get your Adzuna API credentials
 #    Sign up at https://developer.adzuna.com (free)
