@@ -185,6 +185,31 @@ Then ask:
 
 > Would you like me to make any changes, or are these ready to send?
 
+## Step 7 — Offer Google Drive Export
+
+After the user confirms the documents are ready (or immediately after the checklist if they don't request changes), offer to upload to Google Drive:
+
+> Would you like me to export these to Google Drive?
+> - [CV filename]
+> - [Cover letter filename]
+>
+> I can upload both and share a link to each.
+
+If the user says yes, use the `gdrive` CLI to upload both files:
+
+```bash
+gdrive files upload --parent <folder_id_if_configured> outputs/cv/YYYY-MM-DD_CompanyName_RoleTitle.docx
+gdrive files upload --parent <folder_id_if_configured> outputs/cover_letters/YYYY-MM-DD_CompanyName_RoleTitle.docx
+```
+
+- If `google_drive_folder_id` is set in `config.yaml`, upload into that folder. Otherwise upload to root.
+- If `gdrive` is not installed or auth fails, tell the user and show the local file paths instead.
+- After a successful upload, present the shareable links:
+
+> **Uploaded to Google Drive:**
+> - CV: [link]
+> - Cover letter: [link]
+
 ## Rules
 
 - **Never fabricate skills or experience.** If the job requires something the candidate doesn't have, note the gap honestly in the cover letter or omit it — never invent it.
