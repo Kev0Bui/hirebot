@@ -17,6 +17,16 @@ config.yaml
 config.local.yaml
 .env
 
+# Personal profile data (created by /setup, never committed)
+# Use profile/*.example.md as templates
+profile/01-candidate.md
+profile/02-behavioural.md
+profile/03-writing-style.md
+profile/04-interview-prep.md
+
+# Job application tracker (personal)
+job_tracker.csv
+
 # OS files
 .DS_Store
 Thumbs.db

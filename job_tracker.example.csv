@@ -1,0 +1,4 @@
+date_added,job_id,company,role_title,location,work_type,salary,fit_score,source_url,status,notes
+2026-01-15,SEEK-12345678,Example Company,Content Designer,Remote,full_time,90000-120000,20,https://www.seek.com.au/job/12345678,Applied,CV and cover letter drafted.
+2026-01-16,LI-9876543210,Another Company,UX Writer,Sydney NSW,full_time,not_disclosed,15,https://www.linkedin.com/jobs/view/9876543210/,Shortlisted,Phone screen scheduled.
+2026-01-20,COMPANY-CAREERS-001,Third Company,Content Strategist,Remote worldwide,contract,not_disclosed,18,https://example.com/careers/001,Not Applied,Outside target salary range.
